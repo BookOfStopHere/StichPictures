@@ -164,7 +164,7 @@
 //}
 
 //https://stackoverflow.com/questions/1352864/how-to-get-uiimage-from-eaglview/1945733
--(void)snapUIImage
+-(UIImage *)snapUIImage
 {
     int s = 1;
     UIScreen* screen = [ UIScreen mainScreen ];
@@ -199,11 +199,13 @@
     CGImageRef imageRef = CGImageCreate(w*s, h*s, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpaceRef, bitmapInfo, provider, NULL, NO, renderingIntent);
     // then make the uiimage from that
     UIImage *myImage = [ UIImage imageWithCGImage:imageRef scale:s orientation:UIImageOrientationUp ];
-    UIImageWriteToSavedPhotosAlbum( myImage, nil, nil, nil );
+//    UIImageWriteToSavedPhotosAlbum( myImage, nil, nil, nil );
     CGImageRelease( imageRef );
     CGDataProviderRelease(provider);
     CGColorSpaceRelease(colorSpaceRef);
     free(buffer2);
+    
+    return myImage;
 }
 
 
